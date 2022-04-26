@@ -1,0 +1,15 @@
+/home/bernardo/prog/C#/Compilador/bin/Debug/net6.0/Compilador
+/home/bernardo/prog/C#/Compilador/bin/Debug/net6.0/Compilador.deps.json
+/home/bernardo/prog/C#/Compilador/bin/Debug/net6.0/Compilador.runtimeconfig.json
+/home/bernardo/prog/C#/Compilador/bin/Debug/net6.0/Compilador.dll
+/home/bernardo/prog/C#/Compilador/bin/Debug/net6.0/Compilador.pdb
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.csproj.AssemblyReference.cache
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.GeneratedMSBuildEditorConfig.editorconfig
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.AssemblyInfoInputs.cache
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.AssemblyInfo.cs
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.csproj.CoreCompileInputs.cache
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.dll
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/refint/Compilador.dll
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.pdb
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/Compilador.genruntimeconfig.cache
+/home/bernardo/prog/C#/Compilador/obj/Debug/net6.0/ref/Compilador.dll
