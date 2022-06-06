@@ -26,7 +26,7 @@ namespace Compilador
         public static string intVali = @"^[0-9]+$";
 
         //regex para operadores aritimeticos
-        public static string aritimetico = @"[*|/|%|+|=|-|(|)|[|]|{|}|,]";
+        public static string aritimetico = @"[*|;|,|/|%|+|=|\-|(|)|{|}|>|<]";
 
         //regex para separadores de operadores aritimeticos
         public static string aritiSep = @"[a-zA-Z|\s|(|)]";

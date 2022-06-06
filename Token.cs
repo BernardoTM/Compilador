@@ -17,7 +17,9 @@ namespace Compilador
 
         public virtual void ImprimeToken()
         {
-            System.Console.WriteLine("Coluna " + Coluna + " Linha " + Linha + " Token " + Nome + " Tipo " + Tipo);
+            System.Console.WriteLine(Linha + "   | " + Coluna + "   | " + Nome + "   | " + Tipo);
         }
+        public static System.Collections.Generic.List<Token> tokens = new List<Token>();
+
     }
 }

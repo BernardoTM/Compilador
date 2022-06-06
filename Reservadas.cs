@@ -1,3 +1,4 @@
+
 namespace Compilador
 {
     public static class Reservadas
@@ -5,21 +6,23 @@ namespace Compilador
 
         public static Dictionary<string, string> palavras = new Dictionary<string, string>()
             {
-                { "int", "Palavra reservada int"},
-                { "float", "Palavra reservada int"},
-                { "char", "Palavra reservada char"},
+                { "int", "Tipo"},
+                { "float", "Tipo"},
+                { "char", "Tipo"},
+                { "double", "Tipo"},
                 { "break", "Palavra reservada break"},
                 { "do", "Palavra reservada do"},
                 { "else", "Palavra reservada else"},
                 { "for", "Palavra reservada for"},
                 { "while", "Palavra reservada while"},
-                { "double", "Palavra reservada double"},
                 { "if", "Palavra reservada if"}
             };
 
         public static Dictionary<string, string> operadores = new Dictionary<string, string>()
             {
                 { "-", "Operador aritimedico -"},
+                { ">", "Operador logico >"},
+                { "<", "Operador logico <"},
                 { "*", "Operador aritimedico *"},
                 { "+", "Operador aritimedico +"},
                 { "=", "atribuição ="},
@@ -31,6 +34,7 @@ namespace Compilador
                 { "]", "Separdor ]"},
                 { "{", "Separdor {"},
                 { "}", "Separador }"},
+                { ";", "Separador ;"},
                 { ",", "Separdor ,"}
             };
     }
