@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "WwUtoZXH8TGFwA3WPFqgdy9EFFlv0dcYjGLQB1Xydr/AWIaGhndncL+m1iokIZcxW7w5Is8n3mZbIr1OMvyzAg==",
+  "dgSpecHash": "cn/6+Tp2IfVkx8ZBULk+M8NanIsEnYe4tzWvd6Nax8ymIrwgTbIWMh0xcPb/CmpOb1joVqdPZBxKeSX8YeSEvQ==",
   "success": true,
   "projectFilePath": "/home/bernardo/prog/C#/Compilador/Compilador.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/bernardo/.nuget/packages/microsoft.netcore.app.ref/6.0.6/microsoft.netcore.app.ref.6.0.6.nupkg.sha512",
+    "/home/bernardo/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.6/microsoft.aspnetcore.app.ref.6.0.6.nupkg.sha512",
+    "/home/bernardo/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.6/microsoft.netcore.app.host.linux-x64.6.0.6.nupkg.sha512"
+  ],
   "logs": []
 }

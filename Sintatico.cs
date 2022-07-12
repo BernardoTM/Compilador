@@ -4,10 +4,13 @@ namespace Compilador
     {
         public static void Run()
         {
+            List<Variaveis> variaveis = new List<Variaveis>();
             Queue<Token> filaToken = new Queue<Token>(Token.tokens);
 
             Token token;
-
+            int flag = 0;
+            int flag2 = 0;
+            int contadorTemp = 0;
             Token dequeue()
             {
                 try
@@ -21,15 +24,28 @@ namespace Compilador
             }
 
             token = dequeue();
-            // while (token.Tipo != "")
-            // {
             codigo();
-            //  }
+
 
             void codigo()
             {
+                flag2 = 1;
                 if (token.Tipo == "Variavel ")
                 {
+                    foreach (var item in variaveis)
+                    {
+                        if (item.Nome == token.Nome)
+                        {
+                            flag2 = 0;
+                            break;
+                        }
+
+                    }
+                    if (flag2 == 1)
+                    {
+                        throw new Exception("A variavel " + token.Nome + " não foi declarada");
+                    }
+
                     //System.Console.WriteLine("atribuicao");
                     atribuicao();
                     if (token.Nome == ";")
@@ -41,6 +57,7 @@ namespace Compilador
                     {
                         //  throw new Exception("Era esperado ; no final da linha " + (token.Linha - 1));
                         System.Console.WriteLine("Era esperado ; no final da linha " + (token.Linha - 1));
+                        codigo();
                     }
                 }
                 else if (token.Tipo == "Tipo")
@@ -55,6 +72,7 @@ namespace Compilador
                     else
                     {
                         System.Console.WriteLine("Era esperado ; no final da linha " + (token.Linha - 1));
+                        codigo();
                     }
 
                 }
@@ -103,9 +121,28 @@ namespace Compilador
             }
             void declaracao()
             {
+                if (flag == 1)
+                {
+                    variaveis.Add(new Variaveis(variaveis[variaveis.Count - 1].Tipo));
+                    flag = 0;
+                }
+                else
+                {
+
+                    variaveis.Add(new Variaveis(token.Nome));
+                }
                 token = dequeue();
                 if (token.Tipo == "Variavel ")
                 {
+                    foreach (var item in variaveis)
+                    {
+                        if (item.Nome == token.Nome)
+                        {
+                            throw new Exception("A variavel " + token.Nome + " ja foi declarada 2 vezes");
+
+                        }
+                    }
+                    variaveis[variaveis.Count - 1].Nome = token.Nome;
                     //System.Console.WriteLine("atribuicao");
                     atribuicao();
                 }
@@ -116,6 +153,7 @@ namespace Compilador
                 }
                 if (token.Nome == ",")
                 {
+                    flag = 1;
                     //System.Console.WriteLine("declaracao");
                     declaracao();
                 }
@@ -287,21 +325,50 @@ namespace Compilador
             }
             void esprecao()
             {
-                //System.Console.WriteLine("T");
-                T();
-                //System.Console.WriteLine("Elinha");
-                Elinha();
+                if (token.Nome == "(" || token.Tipo == "Variavel " || token.Tipo == "Numeral int " || token.Tipo == "Numeral float ")
+                {
+                    if (token.Tipo == "Numeral int ")
+                    {
+                        var op1 = T();
+                        //System.Console.WriteLine("Elinha");
+                        var x = Elinha();
+                        if (x.Length > 0 && x.Substring(0, 1) == "+")
+                        {
+                            System.Console.WriteLine("add VarTemp" + contadorTemp++ + " " + op1 + ", " + x.Substring(2, x.Length - 2));
+                        }
+                        if (x.Length > 0 && x.Substring(0, 1) == "-")
+                        {
+                            System.Console.WriteLine("sub VarTemp" + contadorTemp++ + " " + op1 + ", " + x.Substring(2, x.Length - 2));
+                        }
+                    }
+                    else
+                    {
+                        //System.Console.WriteLine("T");
+                        T();
+                        //System.Console.WriteLine("Elinha");
+                        Elinha();
+                    }
+                }
 
             }
 
-            void T()
+            string T()
             {
                 if (token.Nome == "(" || token.Tipo == "Variavel " || token.Tipo == "Numeral int " || token.Tipo == "Numeral float ")
                 {
                     //System.Console.WriteLine("F");
-                    F();
+                    var op1 = F();
                     //System.Console.WriteLine("Tlinha");
-                    Tlinha();
+                    string x = Tlinha();
+                    if (x.Length > 0 && x.Substring(0, 1) == "*")
+                    {
+                        System.Console.WriteLine("mul VarTemp" + contadorTemp++ + " " + op1 + ", " + x.Substring(2, x.Length - 2));
+                    }
+                    if (x.Length > 0 && x.Substring(0, 1) == "/")
+                    {
+                        System.Console.WriteLine("div VarTemp" + contadorTemp++ + " " + op1 + ", " + x.Substring(2, x.Length - 2));
+                    }
+                    return op1;
                 }
                 else
                 {
@@ -309,7 +376,7 @@ namespace Compilador
 
                 }
             }
-            void F()
+            string F()
             {
                 if (token.Nome == "(")
                 {
@@ -319,40 +386,76 @@ namespace Compilador
                     {
                         ////ok
                         token = dequeue();
+                        return ""; // ver depois 
                     }
                     else
+                    {
                         throw new Exception("Esprecao invalida na linha " + token.Linha);
+                    }
 
                 }
                 else if (token.Tipo == "Variavel " || token.Tipo == "Numeral int " || token.Tipo == "Numeral float ")
                 {
+                    if (token.Tipo == "Numeral int ")
+                    {
+                        var temp = token;
+                        token = dequeue();
+                        return temp.Nome;
+                    }
                     token = dequeue();
+                    return ""; // ver depois 
                     ////ok
                 }
+                return ""; // ver depois 
 
             }
 
-            void Elinha()
+            string Elinha()
             {
-                if (token.Nome == "+" || token.Nome == "-")
+                if (token.Nome == "+")
                 {
                     token = dequeue();
                     //System.Console.WriteLine("Tlinha");
-                    T();
+                    var op1 = T();
                     //System.Console.WriteLine("Elinha");
                     Elinha();
+                    return "+ " + op1;
                 }
+                else if (token.Nome == "-")
+                {
+                    token = dequeue();
+                    //System.Console.WriteLine("Tlinha");
+                    var op1 = T();
+                    //System.Console.WriteLine("Elinha");
+                    Elinha();
+                    return "- " + op1;
+                }
+                return "";
             }
 
-            void Tlinha()
+            string Tlinha()
             {
-                if (token.Nome == "*" || token.Nome == "/")
+                if (token.Nome == "*")
                 {
                     token = dequeue();
                     //System.Console.WriteLine("F");
-                    F();
+                    var op1 = F();
                     //System.Console.WriteLine("Tlinha");
                     Tlinha();
+                    return "* " + op1;
+                }
+                else if (token.Nome == "/")
+                {
+                    token = dequeue();
+                    //System.Console.WriteLine("F");
+                    var op1 = F();
+                    //System.Console.WriteLine("Tlinha");
+                    Tlinha();
+                    return "/ " + op1;
+                }
+                else
+                {
+                    return "";
                 }
             }
         }

@@ -242,11 +242,11 @@ namespace Compilador
                     }
                 }
             }
-            foreach (var token in Token.tokens)
-            {
-                token.ImprimeToken();
-            }
-            System.Console.WriteLine();
+            // foreach (var token in Token.tokens)
+            // {
+            //     token.ImprimeToken();
+            // }
+            // System.Console.WriteLine();
             foreach (var erro in erros)
             {
                 erro.ImprimeToken();
